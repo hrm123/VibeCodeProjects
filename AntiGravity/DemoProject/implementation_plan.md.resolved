@@ -1,0 +1,55 @@
+# Implementation Plan - Storefront Pages
+
+Add storefront functionality to Planetravel including product display, ordering, and customer registration using GraphQL.
+
+## User Review Required
+
+> [!IMPORTANT]
+> I am assuming the GraphQL schema structure for `Product`, `Order`, and `Customer` as introspection was truncated. I will verify these fields during implementation.
+> - **Product**: `id`, `name`, `description`, `price`, `imageUrl`
+> - **Customer**: `id`, `name`, `email`, `password`
+> - **Order**: `id`, `productId`, `customerId`, `quantity`
+
+## Proposed Changes
+
+### Dependencies
+- [NEW] Install `@apollo/client` and `graphql`
+
+### Infrastructure
+#### [NEW] [apolloClient.ts](file:///d:/code/mern/planetravel/src/apolloClient.ts)
+- Initialize Apollo Client pointing to `http://localhost:8000/graphql`
+
+#### [MODIFY] [main.tsx](file:///d:/code/mern/planetravel/src/main.tsx)
+- Wrap [App](file:///d:/code/mern/planetravel/src/App.tsx#13-32) with `ApolloProvider`
+
+### Storefront Features
+Create new feature directory `src/features/storefront`
+
+#### [NEW] [ProductListPage.tsx](file:///d:/code/mern/planetravel/src/features/storefront/ProductListPage.tsx)
+- Query `products`
+- Display grid of products using DaisyUI Cards
+- "Buy" button triggers order flow
+
+#### [NEW] [RegistrationPage.tsx](file:///d:/code/mern/planetravel/src/features/storefront/RegistrationPage.tsx)
+- Mutation `registerCustomer` (or similar)
+- Form with Name, Email, Password
+
+#### [NEW] [OrderModal.tsx](file:///d:/code/mern/planetravel/src/features/storefront/OrderModal.tsx)
+- Mutation `createOrder`
+- Simple form to confirm quantity and place order
+
+#### [MODIFY] [App.tsx](file:///d:/code/mern/planetravel/src/App.tsx)
+- Add routes:
+    - `/products` -> `ProductListPage`
+    - `/register` -> `RegistrationPage`
+
+## Verification Plan
+
+### Automated Tests
+- Run `npm run testv` to ensure no regressions.
+- I will add basic component tests if time permits.
+
+### Manual Verification
+1.  **Registration**: Go to `/register`, sign up a new user. Verify success message.
+2.  **Products**: Go to `/products`, see list of products.
+3.  **Order**: Click "Buy" on a product, place order. Verify order success.

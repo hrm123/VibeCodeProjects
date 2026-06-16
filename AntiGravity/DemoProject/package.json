@@ -1,0 +1,25 @@
+{
+  "name": "google-news-watcher",
+  "version": "1.0.0",
+  "description": "CLI app that fetches latest Google News every 30 minutes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "news",
+    "google-news",
+    "rss",
+    "cli"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cli-table3": "^0.6.5",
+    "node-cron": "^3.0.3",
+    "node-notifier": "^10.0.1",
+    "rss-parser": "^3.13.0"
+  }
+}
